@@ -1,3 +1,4 @@
+```groovy
 pipeline {
 
     agent any
@@ -9,75 +10,83 @@ pipeline {
 
     stages {
 
-        stage('Welcome') {
+        stage('Robot Activation') {
             steps {
-
                 echo '''
+                
+        ======================================
 
-        =====================================
+              JENKINS ROBOT SYSTEM
 
-                JENKINS AUTOMATION
+                   [########]
+                   [ O    O ]
+                   [   --   ]
+                   [########]
 
-                    .-""""-.
-                   |        |
-                   |  O  O  |
-                   |   __   |
-                   | (____) |
-                   |        |
+              SYSTEM ACTIVATED!
+              READY FOR AUTOMATION!
 
-               HELLO! I AM JENKINS BOT!
-
-        =====================================
+        ======================================
 
                 '''
 
+                echo "Pipeline Version: 2.0"
                 echo "Build Number: ${BUILD_NUMBER}"
-                echo "Build ID: ${BUILD_ID}"
-                echo "Welcome to Jenkins Poll SCM!"
-
             }
         }
 
         stage('GitHub Checkout') {
             steps {
-
-                echo 'Checking out GitHub repository...'
+                echo 'Connecting to GitHub repository...'
 
                 checkout scm
 
-                echo 'GitHub checkout successful!'
-
+                echo 'GitHub repository downloaded successfully!'
             }
         }
 
-        stage('Repository Information') {
+        stage('System Information') {
             steps {
-
-                echo 'Collecting repository information...'
+                echo 'Collecting system information...'
 
                 sh '''
+                    echo "Operating System:"
+                    uname -s
+
+                    echo "Current User:"
+                    whoami
+
+                    echo "Current Date:"
+                    date
+
                     echo "Current Directory:"
                     pwd
+                '''
+            }
+        }
 
-                    echo "Current Branch:"
-                    git branch --show-current
+        stage('Repository Inspection') {
+            steps {
+                echo 'Inspecting repository files...'
 
+                sh '''
                     echo "Latest Commit:"
                     git log -1 --oneline
 
                     echo "Repository Files:"
                     ls -la
-                '''
 
+                    echo "Tracked File Count:"
+                    git ls-files | wc -l
+                '''
             }
         }
 
-        stage('Build Process') {
+        stage('Build Simulation') {
             steps {
-
                 echo '''
-
-                BUILD STARTED...
+                
+                ROBOT BUILDING APPLICATION...
 
                 [#####...............] 25%
                 [##########..........] 50%
@@ -87,53 +96,54 @@ pipeline {
                 '''
 
                 sh '''
-                    echo "Checking repository..."
+                    echo "Checking Git repository..."
 
-                    test -d .git
+                    git rev-parse --is-inside-work-tree
 
-                    echo "Repository validation successful!"
+                    echo "Repository check completed!"
                 '''
 
+                echo 'Build simulation completed!'
             }
         }
 
-        stage('Final Celebration') {
+        stage('Mission Completed') {
             steps {
-
                 echo '''
 
-              __________________________
+        ======================================
+
+                  MISSION COMPLETED!
+
+                      [ O  O ]
+                      [  ^^  ]
+                      [______]
 
                   BUILD SUCCESSFUL!
 
-                      (^_^)
-
-              __________________________
+        ======================================
 
                 '''
 
                 echo "Build Number: ${BUILD_NUMBER}"
+                echo "Pipeline Version: 2.0"
                 echo "Status: SUCCESS"
-
             }
         }
-
     }
 
     post {
-
         success {
-            echo 'SUCCESS! Everything executed perfectly!'
+            echo 'ROBOT STATUS: ALL SYSTEMS OPERATIONAL!'
         }
 
         failure {
-            echo 'FAILED! Check Console Output.'
+            echo 'ROBOT STATUS: BUILD FAILED!'
         }
 
         always {
-            echo 'Jenkins Pipeline Execution Finished.'
+            echo 'Pipeline 2 execution finished.'
         }
-
     }
-
 }
+```
