@@ -16,15 +16,14 @@ pipeline {
 
         =====================================
 
-                 JENKINS AUTOMATION
+                JENKINS AUTOMATION
 
                     .-""""-.
-                   /        \
-                  |  O    O  |
-                  |    __    |
-                  |  (____)  |
-                   \        /
-                    '-.__.-'
+                   |        |
+                   |  O  O  |
+                   |   __   |
+                   | (____) |
+                   |        |
 
                HELLO! I AM JENKINS BOT!
 
